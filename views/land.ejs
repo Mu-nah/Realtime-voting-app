@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<script type="text/javascript">
+
+window.onload = function () {
+	var chart = new CanvasJS.Chart("chartContainer", {
+		title:{
+			text: "Total number of votes: <%= totalVotes %> "              
+		},
+		data: [              
+		{
+			// Change type to "doughnut", "line", "splineArea", etc.
+			type: "column",
+			dataPoints: [
+				{ label: "PDP",  y: <%= resc[0] %>},
+				{ label: "APC", y: <%= resc[1] %>  },
+				{ label: "APGA", y: <%= resc[2] %> },
+				{ label: "LP",  y: <%= resc[3] %>  },
+				{ label: "SDP",  y: <%= resc[4] %> }
+			]
+		}
+		]
+	});
+	chart.render();
+}
+</script>
+</head>
+<body>
+      <%- include('./partials/header.ejs') %>
+      <main>
+        <% if( role==="admin"){ %>
+      <div class="container">
+        <p class="fed"><strong>The Results so far shows that</strong><br><br>
+        Mr. Peter Obi (PDP) has <b> <%= resc[0] %></b> votes.<br>
+    Dr. Goodluck Jonathan (APC) has <b> <%= resc[1] %></b> votes.<br>
+        Mr. Yul Edochie (APGA) has <b> <%= resc[2] %></b> votes.<br>
+        Sen. Ifeanyi Ubah (LP) has <b> <%= resc[3] %></b> votes.<br>
+        Chief Bola Tinubu (SDP) has <b> <%= resc[4 ] %></b> votes. <br>
+        </p>
+        </div>
+  
+  <div class="parent">
+         
+<div id="chartContainer" style="height: 300px; width: 100%;"></div>
+
+
+</div> 
+<% } else { %> 
+<div class="no_gree">You're not authorized to view this report.</div >
+<% } %>
+</main> 
+    <%- include('./partials/footer.ejs') %>
+</body>
+</html>
